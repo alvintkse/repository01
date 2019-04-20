@@ -1,4 +1,4 @@
-# repository01
-database name: canteenDB
-database user name: nbuser
-database user password: nbuser
+# repository01<br>
+database name: canteenDB<br>
+database user name: nbuser<br>
+database user password: nbuser<br>
