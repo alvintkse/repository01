@@ -5,28 +5,19 @@
  */
 package controller;
 
-import entity.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import entity.Student;
+import java.io.*;
+import java.util.List;
+import javax.persistence.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.transaction.UserTransaction;
+import javax.servlet.http.*;
 
 /**
  *
  * @author user
  */
-public class EditBeverageList extends HttpServlet {
-@PersistenceContext
-    EntityManager em;
-    @Resource
-    UserTransaction utx;
+public class ProcessStudentLogin extends HttpServlet {
+    @PersistenceContext EntityManager em;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,25 +30,23 @@ public class EditBeverageList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            
-            Beverage beverage = new Beverage();
-            beverage.setBeverageid(request.getParameter("beverageid"));
-            beverage.setBeveragename(request.getParameter("beveragename"));
-            beverage.setBeveragecreditpoints(Integer.parseInt(request.getParameter("beveragecreditpoints")));
-            beverage.setBeveragequantity(Integer.parseInt(request.getParameter("beveragequantity")));            
-            
-            try {
-            utx.begin();
-            em.merge(beverage);
-            utx.commit();
-            } catch (Exception e) {
-                //utx.rollback();
+        try {
+            String id = request.getParameter("studentid");
+            String password = request.getParameter("studentpassword");
+            List<Student> students = em.createNamedQuery("Student.findByStudentidAndStudentpassword").setParameter("studentid", id).setParameter("studentpassword", password).getResultList();
+            // check list empty then name and password wrong
+            if (students.isEmpty())
+            {
+                //if no staff found
+                System.out.println("student not found");
             }
-            session.setAttribute("beverage", beverage);
-            response.sendRedirect("GetBeverageList");
+            Student student = students.get(0);
+            HttpSession session = request.getSession();
+            session.setAttribute("student", student);
+            response.sendRedirect("main/MainPage.jsp");
+        }   
+        catch (Exception ex) {
+         
         }
     }
 

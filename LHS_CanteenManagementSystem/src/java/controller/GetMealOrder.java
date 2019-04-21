@@ -22,7 +22,7 @@ import javax.transaction.UserTransaction;
  *
  * @author user
  */
-public class EditBeverageList extends HttpServlet {
+public class GetMealOrder extends HttpServlet {
 @PersistenceContext
     EntityManager em;
     @Resource
@@ -39,25 +39,18 @@ public class EditBeverageList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            
-            Beverage beverage = new Beverage();
-            beverage.setBeverageid(request.getParameter("beverageid"));
-            beverage.setBeveragename(request.getParameter("beveragename"));
-            beverage.setBeveragecreditpoints(Integer.parseInt(request.getParameter("beveragecreditpoints")));
-            beverage.setBeveragequantity(Integer.parseInt(request.getParameter("beveragequantity")));            
-            
-            try {
+         HttpSession session = request.getSession();
+         
+        Mealorder mealorder=new Mealorder();
+        String mealorderID = request.getParameter("mealorderID");
+        try {     
             utx.begin();
-            em.merge(beverage);
+            mealorder=(Mealorder) em.find(Mealorder.class,mealorderID);
             utx.commit();
-            } catch (Exception e) {
-                //utx.rollback();
-            }
-            session.setAttribute("beverage", beverage);
-            response.sendRedirect("GetBeverageList");
+            session.setAttribute("mealorder", mealorder);
+            response.sendRedirect("staff/editMealOrder.jsp");
+
+        } catch (Exception ex) {
         }
     }
 

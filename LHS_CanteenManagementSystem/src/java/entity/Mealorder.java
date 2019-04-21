@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author user
  */
 @Entity
 @Table(name = "MEALORDER")
@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Mealorder.findAll", query = "SELECT m FROM Mealorder m")
     , @NamedQuery(name = "Mealorder.findByMealorderid", query = "SELECT m FROM Mealorder m WHERE m.mealorderid = :mealorderid")
     , @NamedQuery(name = "Mealorder.findByMealorderdate", query = "SELECT m FROM Mealorder m WHERE m.mealorderdate = :mealorderdate")
-    , @NamedQuery(name = "Mealorder.findByMealorderstatus", query = "SELECT m FROM Mealorder m WHERE m.mealorderstatus = :mealorderstatus")})
+    , @NamedQuery(name = "Mealorder.findByMealorderstatus", query = "SELECT m FROM Mealorder m WHERE m.mealorderstatus = :mealorderstatus")
+    , @NamedQuery(name = "Mealorder.findByMealorderidAsc", query = "SELECT m FROM Mealorder m ORDER BY m.mealorderid")})
 public class Mealorder implements Serializable {
 
     private static final long serialVersionUID = 1L;

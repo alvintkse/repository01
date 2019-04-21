@@ -38,8 +38,11 @@ public class GetMealList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            //String ID = request.getParameter("ID");
+            //Staff staff = em.find(Staff.class, "3333");
             HttpSession session = request.getSession();
-            Query query = em.createNamedQuery("Meal.findAll");
+            //session.setAttribute("staff", staff);
+            Query query = em.createNamedQuery("Meal.findByMealidAsc");
             List<Meal> mealList = query.getResultList();
             session.setAttribute("mealList", mealList);
             response.sendRedirect("staff/index.jsp");

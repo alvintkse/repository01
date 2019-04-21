@@ -36,7 +36,7 @@ public class GetBeverageList extends HttpServlet {
             //Staff staff = em.find(Staff.class, "3333");
             HttpSession session = request.getSession();
             //session.setAttribute("staff", staff);
-            Query query = em.createNamedQuery("Beverage.findAll");
+            Query query = em.createNamedQuery("Beverage.findByBeverageidAsc");
             List<Beverage> beverageList = query.getResultList();
             session.setAttribute("beverageList", beverageList);
             response.sendRedirect("staff/beverage.jsp");

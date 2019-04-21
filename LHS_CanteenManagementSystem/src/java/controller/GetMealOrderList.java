@@ -36,7 +36,7 @@ public class GetMealOrderList extends HttpServlet {
             //Staff staff = em.find(Staff.class, "3333");
             HttpSession session = request.getSession();
             //session.setAttribute("staff", staff);
-            Query query = em.createNamedQuery("Mealorder.findAll");
+            Query query = em.createNamedQuery("Mealorder.findByMealorderidAsc");
             List<Mealorder> mealOrderList = query.getResultList();
             session.setAttribute("mealOrderList", mealOrderList);
             response.sendRedirect("staff/mealOrder.jsp");

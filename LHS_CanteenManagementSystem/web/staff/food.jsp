@@ -39,11 +39,12 @@
                     <h1>${staff.staffname}</h1>
                     <h2>Staff Menu</h2>
                     <ul>
-                        <li><a href="index.jsp">Meal List</a></li>
+                        <li><a href="../GetMealList">Meal List</a></li>
                         <li><a href="../GetMealOrderList">Meal Order List</a></li>
                         <li><a href="../GetFoodList">Food List</a></li>
                         <li><a href="../GetBeverageList">Beverage List</a></li>
-                        <li><a href="topUp.html">Top Up Credit Points</a></li>
+                        <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                        <li><a href="coupon.jsp">Coupon</a></li>
                         <li><a href="studentProfile.jsp">Profile</a></li>
                         <li><a href="../ProcessLogout">Logout</a></li>
                     </ul>
@@ -70,29 +71,33 @@
                                             <th>Credit Points</th>
                                             <th>Quantity</th>
                                             <th>Edit</th>
-                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%  int[] beverageArr = new int[foodList.size()];
+                                        <%  int[] foodArr = new int[foodList.size()];
                                             for (int i = 0; i < foodList.size(); ++i) {
                                             Food food = foodList.get(i);%>
+                                    
                                             <tr>
-                                                <td><%=food.getFoodid()%></td>                                               
-                                                    
-                                                <td>
+                                                <form action="../GetFood?foodID=<%=food.getFoodid()%>" method="post">
+                                                <td name="foodid">
+                                                    <%=food.getFoodid()%>
+                                                </td>                                              
+                                                <td name="foodname">
                                                     <%=food.getFoodname()%>
                                                 </td>
-                                                <td>
+                                                <td name="foodcreditpoints">
                                                     <%=food.getFoodcreditpoints()%>
                                                 </td>
-                                                <td>
+                                                <td name="foodquantity">
                                                     <%=food.getFoodquantity()%>
                                                 </td>
-                                                <td><a href="../GetFood">Edit</a></td>
-                                                <td><a href="deleteFood.jsp">Delete</a></td>
-                                            </tr>
+                                                <td><input type="submit" value="Edit" class="primary small" /></td>
+                                                </form>
+                                             </tr>
+                                            
                                             <% }%>
+                                            
                                     </tbody>
                                 </table>
                             </div>

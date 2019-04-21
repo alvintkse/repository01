@@ -1,65 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import entity.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.io.*;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+//import java.util.*;
+import javax.persistence.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author user
- */
-public class EditMealOrderList extends HttpServlet {
-@PersistenceContext
+public class Coupon extends HttpServlet {
+
+    @PersistenceContext
     EntityManager em;
     @Resource
     UserTransaction utx;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        try {
             String id = request.getParameter("mealorderid");
-            String status = request.getParameter("mealorderstatus");
             
             HttpSession session = request.getSession();   
             Mealorder mealorder = em.find(Mealorder.class, id);
             
             mealorder.setMealorderid(id);
-            mealorder.setMealorderstatus(status);          
+            mealorder.setMealorderstatus("Completed");
             
-            try {
             utx.begin();
             em.merge(mealorder);
             utx.commit();
-            } catch (Exception e) {
-                //utx.rollback();
-            }
+           
             session.setAttribute("mealorder", mealorder);
-            response.sendRedirect("GetMealOrderList");
+
+            response.sendRedirect("staff/index.jsp");
+
+        } catch (Exception ex) {
         }
     }
 
@@ -101,5 +77,4 @@ public class EditMealOrderList extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

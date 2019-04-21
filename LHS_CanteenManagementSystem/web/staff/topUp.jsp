@@ -4,8 +4,11 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+
+
 <jsp:useBean id="staff" scope="session" class="entity.Staff" />
 <%@page import="entity.*, java.util.*" %>
+
 <html>
 
 <head>
@@ -38,13 +41,13 @@
             <h2>Staff Menu</h2>
             <ul>
                 <li><a href="../GetMealList">Meal List</a></li>
-                        <li><a href="../GetMealOrderList">Meal Order List</a></li>
-                        <li><a href="../GetFoodList">Food List</a></li>
-                        <li><a href="../GetBeverageList">Beverage List</a></li>
-                        <li><a href="topUp.jsp">Top Up Credit Points</a></li>
-                        <li><a href="studentProfile.jsp">Profile</a></li>
-                        <li><a href="coupon.jsp">Coupon</a></li>
-                        <li><a href="../ProcessLogout">Logout</a></li>
+                <li><a href="../GetMealOrderList">Meal Order List</a></li>
+                <li><a href="../GetFoodList">Food List</a></li>
+                <li><a href="../GetBeverageList">Beverage List</a></li>
+                <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                <li><a href="coupon.jsp">Coupon</a></li>
+                <li><a href="studentProfile.jsp">Profile</a></li>
+                <li><a href="../ProcessLogout">Logout</a></li>
             </ul>
         </nav>
 
@@ -53,24 +56,19 @@
             <div class="inner">
                 <header>
                     <h1>Lightway High School Canteen Management System</h1>
-                    <h1>Add New Food</h1>
+                    <h1>Top Up Credit Points</h1>
                 </header>
                 <!-- Form -->
                 <section>
-                    <form method="post" action="../AddNewFood">
+                    <form method="post" action="../TopUp">
                         <div class="row gtr-uniform">
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodid" id="demo-name" value="" placeholder="Food ID" />
+                                <input type="text" name="studentid" id="demo-name" value="" placeholder="Student ID" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodname" id="demo-name" value="" placeholder="Food Name" />
+                                <input type="text" name="studentcreditpoints" id="demo-name" value="" placeholder="Credit Points" />
                             </div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodcreditpoints" id="demo-name" value="" placeholder="Credit Points" />
-                            </div>
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodquantity" id="demo-name" value="" placeholder="Quantity" />
-                            </div>
+
                             <div class="col-12">
                                 <ul class="actions">
                                     <li><input type="submit" value="Save Changes" class="primary" /></li>

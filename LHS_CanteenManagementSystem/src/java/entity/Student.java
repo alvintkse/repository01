@@ -22,13 +22,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author user
  */
 @Entity
 @Table(name = "STUDENT")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
+    @NamedQuery(name = "Student.findByStudentidAndStudentpassword", query = "SELECT s FROM Student s WHERE s.studentid = :studentid and s.studentpassword = :studentpassword")
+    , @NamedQuery(name = "Student.findByStudentidAndStudentcreditpoints", query = "SELECT s FROM Student s WHERE s.studentid = :studentid and s.studentcreditpoints = :studentcreditpoints")
+    , @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
     , @NamedQuery(name = "Student.findByStudentid", query = "SELECT s FROM Student s WHERE s.studentid = :studentid")
     , @NamedQuery(name = "Student.findByStudentname", query = "SELECT s FROM Student s WHERE s.studentname = :studentname")
     , @NamedQuery(name = "Student.findByStudentpassword", query = "SELECT s FROM Student s WHERE s.studentpassword = :studentpassword")
@@ -36,9 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Student.findByStudentcreditpoints", query = "SELECT s FROM Student s WHERE s.studentcreditpoints = :studentcreditpoints")
     , @NamedQuery(name = "Student.findByStudentphoneno", query = "SELECT s FROM Student s WHERE s.studentphoneno = :studentphoneno")})
 public class Student implements Serializable {
-
-    @OneToMany(mappedBy = "studentid")
-    private Collection<Mealorderb> mealorderbCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -118,6 +117,10 @@ public class Student implements Serializable {
     public void setStudentphoneno(String studentphoneno) {
         this.studentphoneno = studentphoneno;
     }
+    
+    public int addCreditPoints(int amount){
+        return studentcreditpoints += amount;
+    }
 
     @XmlTransient
     public Collection<Mealorder> getMealorderCollection() {
@@ -151,15 +154,6 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         return "entity.Student[ studentid=" + studentid + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Mealorderb> getMealorderbCollection() {
-        return mealorderbCollection;
-    }
-
-    public void setMealorderbCollection(Collection<Mealorderb> mealorderbCollection) {
-        this.mealorderbCollection = mealorderbCollection;
     }
     
 }

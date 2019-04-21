@@ -37,7 +37,7 @@ public class AddNewBeverage extends HttpServlet {
             }
             session.setAttribute("beverage", beverage);
 
-            response.sendRedirect("staff/beverage.jsp");
+            response.sendRedirect("GetBeverageList");
 
         } catch (Exception ex) {
         }

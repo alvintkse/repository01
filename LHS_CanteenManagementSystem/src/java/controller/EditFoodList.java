@@ -56,7 +56,7 @@ public class EditFoodList extends HttpServlet {
                 //utx.rollback();
             }
             session.setAttribute("food", food);
-            response.sendRedirect("index.html");
+            response.sendRedirect("GetFoodList");
         }
     }
 

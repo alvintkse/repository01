@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="LHS_CanteenManagementSystem" default="default" basedir=".">
-    <description>Builds, tests, and runs the project LHS_CanteenManagementSystem.</description>
+<project name="LHS_CanteenManagementSystem1" default="default" basedir=".">
+    <description>Builds, tests, and runs the project LHS_CanteenManagementSystem1.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

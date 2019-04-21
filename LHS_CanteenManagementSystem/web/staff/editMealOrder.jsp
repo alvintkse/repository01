@@ -5,6 +5,7 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <jsp:useBean id="staff" scope="session" class="entity.Staff" />
+<jsp:useBean id="mealorder" scope="session" class="entity.Mealorder" />
 <%@page import="entity.*, java.util.*" %>
 <html>
 
@@ -37,11 +38,12 @@
             <h1>${staff.staffname}</h1>
             <h2>Staff Menu</h2>
             <ul>
-                <li><a href="index.jsp">Meal List</a></li>
+                <li><a href="../GetMealList">Meal List</a></li>
                 <li><a href="../GetMealOrderList">Meal Order List</a></li>
                 <li><a href="../GetFoodList">Food List</a></li>
                 <li><a href="../GetBeverageList">Beverage List</a></li>
-                <li><a href="topUp.html">Top Up Credit Points</a></li>
+                <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                <li><a href="coupon.jsp">Coupon</a></li>
                 <li><a href="studentProfile.jsp">Profile</a></li>
                 <li><a href="../ProcessLogout">Logout</a></li>
             </ul>
@@ -56,27 +58,27 @@
                 </header>
                 <!-- Form -->
                 <section>
-                    <form method="post" action="index.html">
+                    <form method="post" action="../EditMealOrderList">
                         <div class="row gtr-uniform">
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealorderid" id="demo-name" value="" placeholder="Meal Order ID" readonly="readonly" />
+                                <input type="text" name="mealorderid" id="demo-name" value="${mealorder.mealorderid}" placeholder="Meal Order ID" readonly="readonly" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="date" name="mealorderdate" id="demo-name" value="" placeholder="Meal Order Date" readonly="readonly"/>
+                                <input type="date" name="mealorderdate" id="demo-name" value="${mealorder.mealorderdate}" placeholder="Meal Order Date" readonly="readonly"/>
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealid" id="demo-name" value="" placeholder="Meal ID"  readonly="readonly"/>
+                                <input type="text" name="mealname" id="demo-name" value="${(mealorder.getMealname()).getMealname()}" placeholder="Meal Name"  readonly="readonly"/>
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealcreditpoints" id="demo-name" value="" placeholder="Credit Points" readonly="readonly"/>
+                                <input type="text" name="studentid" id="demo-name" value="${(mealorder.getStudentid()).getStudentid()}" placeholder="Student ID" readonly="readonly"/>
                             </div>
                             <div class="col-12">
-                                <select name="demo-category" id="demo-category">
-													<option value="">Meal Order Status</option>
-													<option value="">Paid</option>
-													<option value="">Completed</option>
-													<option value="">Canceled</option>
-													<option value="">Expired</option>
+                                <select name="mealorderstatus" id="demo-category">
+													<option value="">${mealorder.mealorderstatus}</option>
+													<option value="Paid">Paid</option>
+													<option value="Completed">Completed</option>
+													<option value="Canceled">Canceled</option>
+													<option value="Expired">Expired</option>
 												</select>
                             </div>
                             <div class="col-12">

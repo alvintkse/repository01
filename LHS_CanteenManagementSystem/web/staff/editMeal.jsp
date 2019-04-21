@@ -1,3 +1,6 @@
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="javax.persistence.Query"%>
 <!DOCTYPE HTML>
 <!--
 	Phantom by HTML5 UP
@@ -6,6 +9,8 @@
 -->
 <jsp:useBean id="staff" scope="session" class="entity.Staff" />
 <%@page import="entity.*, java.util.*" %>
+<%EntityManager entityManager = Persistence.createEntityManagerFactory("Login_AgainPU").createEntityManager();%>
+<%session.setAttribute("sessionEntity",entityManager);%>
 <html>
 
 <head>
@@ -37,11 +42,12 @@
             <h1>${staff.staffname}</h1>
             <h2>Staff Menu</h2>
             <ul>
-                <li><a href="index.jsp">Meal List</a></li>
+                <li><a href="../GetMealList">Meal List</a></li>
                 <li><a href="../GetMealOrderList">Meal Order List</a></li>
                 <li><a href="../GetFoodList">Food List</a></li>
                 <li><a href="../GetBeverageList">Beverage List</a></li>
-                <li><a href="topUp.html">Top Up Credit Points</a></li>
+                <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                <li><a href="coupon.jsp">Coupon</a></li>
                 <li><a href="studentProfile.jsp">Profile</a></li>
                 <li><a href="../ProcessLogout">Logout</a></li>
             </ul>
@@ -56,43 +62,50 @@
                 </header>
                 <!-- Form -->
                 <section>
-                    <form method="post" action="index.html">
+                    <form method="post" action="../EditMealList">
                         <div class="row gtr-uniform">
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealid" id="demo-name" placeholder="Meal ID" />
+                                <input type="text" name="mealid" id="demo-name" value="${meal.mealid}" placeholder="Meal ID" readonly="readonly"/>
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealname" id="demo-name" placeholder="Meal Name" />
+                                <input type="text" name="mealname" id="demo-name" value="${meal.mealname}" placeholder="Meal Name" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <select name="foodname" id="demo-category">
-                                                                                                    <option value="">Food Name</option>
-                                                                                                    <%  int[] foodArr = new int[foodList.size()];
-                                                                                                    for (int i = 0; i < foodList.size(); ++i) {
-                                                                                                    Food food = foodList.get(i);%>
-                                                                                                    <option value=""><%=food.getFoodname()%></option>
-                                                                                                    <% }%>
-                                                                                            </select>
+                                <select name="foodselname" id="demo-category">
+                                    <option value="${(meal.getFoodname()).getFoodname()}">${(meal.getFoodname()).getFoodname()}</option>
+                                      
+                                    <%
+                                        Query foodQuery = entityManager.createNamedQuery("Food.findAll");
+                                        List<Food> foodSelectionList = foodQuery.getResultList();
+                                        
+                                        for (int i = 0; i < foodSelectionList.size(); ++i) {
+                                            Food food = foodSelectionList.get(i);%>
+                                        <option><%=food.getFoodname()%></option>
+                                        <% }%>
+                                </select>
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <select name="beveragename" id="demo-category">
-                                                                                                    <option value="">Beverage Name</option>
-                                                                                                    <%  int[] beverageArr = new int[beverageList.size()];
-                                                                                                    for (int i = 0; i < beverageList.size(); ++i) {
-                                                                                                    Beverage beverage = beverageList.get(i);%>
-                                                                                                    <option value=""><%=beverage.getBeveragename()%></option>
-                                                                                                    <% }%>
-                                                                                            </select>
+                                <select name="beverageselname" id="demo-category">
+                                    <option value="${(meal.getBeveragename()).getBeveragename()}">${(meal.getBeveragename()).getBeveragename()}</option>
+                                    <%  
+                                        Query beverageQuery = entityManager.createNamedQuery("Beverage.findAll");
+                                        List<Beverage> beverageSelectionList = beverageQuery.getResultList();
+                                        
+                                        for (int j = 0; j < beverageSelectionList.size(); ++j) {
+                                            Beverage beverage = beverageSelectionList.get(j);%>
+                                        <option><%=beverage.getBeveragename()%></option>
+                                    <% }%>
+                                </select>
                             </div>
                             <div class="col-6 col-12-xsmall">
                                 <select name="mealtype" id="demo-category">
-													<option value="">Meal Type</option>
+													<option value="${meal.mealtype}">${meal.mealtype}</option>
 													<option value="Breakfast">Breakfast</option>
 													<option value="Lunch">Lunch</option>													
 												</select>
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="mealcreditpoints" id="demo-name" value="" placeholder="Meal Credit Points" />
+                                <input type="text" name="mealcreditpoints" id="demo-name" value="${meal.mealcreditpoints}" placeholder="Meal Credit Points" />
                             </div>
 
                             <div class="col-12">

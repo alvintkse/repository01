@@ -39,11 +39,12 @@
                     <h1>${staff.staffname}</h1>
                     <h2>Staff Menu</h2>
                     <ul>
-                        <li><a href="index.jsp">Meal List</a></li>
+                        <li><a href="../GetMealList">Meal List</a></li>
                         <li><a href="../GetMealOrderList">Meal Order List</a></li>
                         <li><a href="../GetFoodList">Food List</a></li>
                         <li><a href="../GetBeverageList">Beverage List</a></li>
-                        <li><a href="topUp.html">Top Up Credit Points</a></li>
+                        <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                        <li><a href="coupon.jsp">Coupon</a></li>
                         <li><a href="studentProfile.jsp">Profile</a></li>
                         <li><a href="../ProcessLogout">Logout</a></li>
                     </ul>
@@ -70,28 +71,27 @@
                                             <th>Credit Points</th>
                                             <th>Quantity</th>
                                             <th>Edit</th>
-                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <%  int[] beverageArr = new int[beverageList.size()];
-                                                                                            for (int i = 0; i < beverageList.size(); ++i) {
-                                                                                            Beverage beverage = beverageList.get(i);%>
+                                             for (int i = 0; i < beverageList.size(); ++i) {
+                                           Beverage beverage = beverageList.get(i);%>
                                             <tr>
-                                                <td>
+                                                <form action="../GetBeverage?beverageID=<%=beverage.getBeverageid()%>" method="post">
+                                                <td name="beverageid">
                                                     <%=beverage.getBeverageid()%>
                                                 </td>
-                                                <td>
+                                                <td name="beveragename">
                                                     <%=beverage.getBeveragename()%>
                                                 </td>
-                                                <td>
+                                                <td name="beveragecreditpoints">
                                                     <%=beverage.getBeveragecreditpoints()%>
                                                 </td>
-                                                <td>
+                                                <td name="beveragequantity">
                                                     <%=beverage.getBeveragequantity()%>
                                                 </td>
-                                                <td><a href="editBeverage.jsp">Edit</a></td>
-                                                <td><a href="deleteBeverage.html">Delete</a></td>
+                                                <td><input type="submit" value="Edit" class="primary small" /></td>
                                             </tr>
                                             <% }%>
                                     </tbody>

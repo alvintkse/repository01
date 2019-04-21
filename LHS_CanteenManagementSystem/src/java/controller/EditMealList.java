@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,16 +42,39 @@ public class EditMealList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
+            String id = request.getParameter("mealid");
             
-            Meal meal = new Meal();
-            meal.setMealid(request.getParameter("mealid"));
+            HttpSession session = request.getSession();   
+            EntityManager entityManager = (EntityManager) session.getAttribute("sessionEntity");
+            Meal meal = em.find(Meal.class, id);
+            
+            meal.setMealid(id);
             meal.setMealname(request.getParameter("mealname"));
-            Food food = new Food(request.getParameter("foodname"));
-            meal.setFoodname(food);
-            Beverage beverage = new Beverage(request.getParameter("beveragename"));
-            meal.setBeveragename(beverage);
-            meal.setMealcreditpoints(Integer.parseInt(request.getParameter("mealcreditpoints")));                 
+            meal.setMealtype(request.getParameter("mealtype"));
+            //meal.setMealtype("Breakfast"); //for now hardcoded, roger you code this one in the AddMeal.jsp
+            meal.setMealcreditpoints(Integer.parseInt(request.getParameter("mealcreditpoints")));
+           
+            log("mealid----------->"+meal.getMealid());
+            log("mealname--------->"+meal.getMealname());
+            log("mealtype--------->"+meal.getMealtype());
+            log("mealcreditpoint-->"+meal.getMealcreditpoints().toString());
+            
+            String selectedFood = request.getParameter("foodselname");
+            String selectedBeverage = request.getParameter("beverageselname");
+            log("foodname--------->"+selectedFood);
+            log("beveragename----->"+selectedBeverage);
+            
+            // Retrieve selected food from session and query the food to get the correct food and store it with meal
+            Query foodQuery = entityManager.createNamedQuery("Food.findByFoodname", Food.class);
+            foodQuery.setParameter("foodname", selectedFood);
+            Food foodResult = (Food) foodQuery.getSingleResult();
+            meal.setFoodname(foodResult);
+            
+            // Retrieve selected beverage from session and query the beverage to get the correct beverage and store it with meal
+            Query beverageQuery = entityManager.createNamedQuery("Beverage.findByBeveragename", Beverage.class);
+            beverageQuery.setParameter("beveragename", selectedBeverage);
+            Beverage beverageResult = (Beverage) beverageQuery.getSingleResult();
+            meal.setBeveragename(beverageResult);
             
             try {
             utx.begin();
@@ -60,7 +84,7 @@ public class EditMealList extends HttpServlet {
                 //utx.rollback();
             }
             session.setAttribute("meal", meal);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("GetMealList");
         }
     }
 

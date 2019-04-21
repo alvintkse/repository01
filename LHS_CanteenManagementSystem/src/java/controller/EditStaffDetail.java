@@ -5,19 +5,28 @@
  */
 package controller;
 
+import entity.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author user
  */
 public class EditStaffDetail extends HttpServlet {
-
+    @PersistenceContext
+    EntityManager em;
+    @Resource
+    UserTransaction utx;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,17 +39,27 @@ public class EditStaffDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditStaffDetail</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditStaffDetail at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            HttpSession session = request.getSession();
+            
+            Staff staff = new Staff();
+            staff.setStaffid(request.getParameter("staffid"));
+            staff.setStaffname(request.getParameter("staffname"));
+            staff.setStaffpassword(request.getParameter("staffpassword"));
+            staff.setStaffphoneno(request.getParameter("staffphoneno"));
+            staff.setStaffemail(request.getParameter("staffemail"));
+            
+            try {
+            utx.begin();
+            em.merge(staff);
+            utx.commit();
+            } catch (Exception e) {
+                utx.rollback();
+            }
+            session.setAttribute("staff", staff);
+            response.sendRedirect("staff/index.jsp");
+
+        } catch (Exception ex) {
         }
     }
 

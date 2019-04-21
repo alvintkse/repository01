@@ -39,11 +39,12 @@
                     <h1>${staff.staffname}</h1>
                     <h2>Staff Menu</h2>
                     <ul>
-                        <li><a href="index.jsp">Meal List</a></li>
+                        <li><a href="../GetMealList">Meal List</a></li>
                         <li><a href="../GetMealOrderList">Meal Order List</a></li>
                         <li><a href="../GetFoodList">Food List</a></li>
                         <li><a href="../GetBeverageList">Beverage List</a></li>
-                        <li><a href="topUp.html">Top Up Credit Points</a></li>
+                        <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                        <li><a href="coupon.jsp">Coupon</a></li>
                         <li><a href="studentProfile.jsp">Profile</a></li>
                         <li><a href="../ProcessLogout">Logout</a></li>
                     </ul>
@@ -55,10 +56,7 @@
                         <header>
                             <h1>Lightway High School Canteen Management System</h1>
                             <h1>Meal Order List</h1>
-                            <ul class="actions">
-                                <li><a href="editMealOrder.jsp" class="button primary">Edit Meal Order</a></li>
-                              
-                            </ul>
+                            
                         </header>
                         <!-- Table -->
                         <section>
@@ -71,30 +69,34 @@
                                             <th>Meal Name</th>
                                             <th>Student ID</th>
                                             <th>Status</th>
+                                            <th>Edit</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%  
-                                                                                            for (int i = 0; i < mealOrderList.size(); ++i) {
-                                                                                            Mealorder mealOrder = mealOrderList.get(i);%>
+                                        <%  int[] mealOrderArr = new int[mealOrderList.size()];
+                                        for (int i = 0; i < mealOrderList.size(); ++i) {
+                                          Mealorder mealOrder = mealOrderList.get(i);%>
+                                                                                            
                                             <tr>
-                                                <td>
+                                                <form action="../GetMealOrder?mealorderID=<%=mealOrder.getMealorderid()%>" method="post">
+                                                <td name="mealorderid">
                                                     <%=mealOrder.getMealorderid()%>
                                                 </td>
-                                                <td>
-                                                    <%=(mealOrder.getMealorderdate()).getDate()%>
+                                                <td name="mealorderdate">
+                                                    <%=(mealOrder.getMealorderdate())%>
                                                 </td>
-                                                <td>
+                                                <td name="mealordername">
                                                     <%=(mealOrder.getMealname()).getMealname()%>
                                                 </td>
-                                                <td>
+                                                <td name="studentid">
                                                     <%=(mealOrder.getStudentid()).getStudentid()%>
                                                 </td>
-                                                <td>
+                                                <td name="mealorderstatus">
                                                     <%=mealOrder.getMealorderstatus()%>
                                                 </td>
-                                                
-                                            </tr>
+                                                <td><input type="submit" value="Edit" class="primary small" /></td>
+                                            </form>
+                                                </tr>
                                             <% }%>
                                     </tbody>
                                 </table>

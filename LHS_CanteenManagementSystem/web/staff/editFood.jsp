@@ -39,11 +39,12 @@
             <h1>${staff.staffname}</h1>
             <h2>Staff Menu</h2>
             <ul>
-                <li><a href="index.jsp">Meal List</a></li>
+                <li><a href="../GetMealList">Meal List</a></li>
                 <li><a href="../GetMealOrderList">Meal Order List</a></li>
                 <li><a href="../GetFoodList">Food List</a></li>
                 <li><a href="../GetBeverageList">Beverage List</a></li>
-                <li><a href="topUp.html">Top Up Credit Points</a></li>
+                <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                <li><a href="coupon.jsp">Coupon</a></li>
                 <li><a href="studentProfile.jsp">Profile</a></li>
                 <li><a href="../ProcessLogout">Logout</a></li>
             </ul>
@@ -61,16 +62,16 @@
                     <form method="post" action="../EditFoodList">
                         <div class="row gtr-uniform">
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodid" id="demo-name" value="" placeholder="Food ID" readonly="readonly" />
+                                <input type="text" name="foodid" id="demo-name" value="${food.foodid}" placeholder="Food ID" readonly="readonly" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodname" id="demo-name" value="" placeholder="Food Name" />
+                                <input type="text" name="foodname" id="demo-name" value="${food.foodname}" placeholder="Food Name" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodcreditpoints" id="demo-name" value="" placeholder="Credit Points" />
+                                <input type="text" name="foodcreditpoints" id="demo-name" value="${food.foodcreditpoints}" placeholder="Credit Points" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="foodquantity" id="demo-name" value="" placeholder="Quantity" />
+                                <input type="text" name="foodquantity" id="demo-name" value="${food.foodquantity}" placeholder="Quantity" />
                             </div>
                             <div class="col-12">
                                 <ul class="actions">

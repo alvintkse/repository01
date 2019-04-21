@@ -1,63 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import entity.*;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+//import java.util.*;
+import javax.persistence.*;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author user
- */
-public class EditBeverageList extends HttpServlet {
-@PersistenceContext
+public class GetBeverage extends HttpServlet {
+
+    @PersistenceContext
     EntityManager em;
     @Resource
     UserTransaction utx;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            
-            Beverage beverage = new Beverage();
-            beverage.setBeverageid(request.getParameter("beverageid"));
-            beverage.setBeveragename(request.getParameter("beveragename"));
-            beverage.setBeveragecreditpoints(Integer.parseInt(request.getParameter("beveragecreditpoints")));
-            beverage.setBeveragequantity(Integer.parseInt(request.getParameter("beveragequantity")));            
-            
-            try {
+         HttpSession session = request.getSession();
+         
+        Beverage beverage=new Beverage();
+        String beverageID = request.getParameter("beverageID");
+        try {     
             utx.begin();
-            em.merge(beverage);
+            beverage=(Beverage) em.find(Beverage.class,beverageID);
             utx.commit();
-            } catch (Exception e) {
-                //utx.rollback();
-            }
             session.setAttribute("beverage", beverage);
-            response.sendRedirect("GetBeverageList");
+            response.sendRedirect("staff/editBeverage.jsp");
+
+        } catch (Exception ex) {
         }
     }
 
@@ -99,5 +72,4 @@ public class EditBeverageList extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

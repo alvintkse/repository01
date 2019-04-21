@@ -40,7 +40,7 @@
                     <h1>${staff.staffname}</h1>
                     <h2>Staff Menu</h2>
                     <ul>
-                        <li><a href="index.jsp">Meal List</a></li>
+                        <li><a href="../GetMealList">Meal List</a></li>
                         <li><a href="../GetMealOrderList">Meal Order List</a></li>
                         <li><a href="../GetFoodList">Food List</a></li>
                         <li><a href="../GetBeverageList">Beverage List</a></li>
@@ -58,20 +58,19 @@
                             <h1>Meal Menu List</h1>
                             <ul class="actions">
                                 <li><a href="../GetFoodAndBeverage" class="button primary">Add New Meal</a></li>
-                                <li><a href="deleteMeal.jsp" class="button">Delete Meal</a></li>
                             </ul>
 
                             <p>Here you can take a look of meal list available in the canteen.</p>
                         </header>
                         <section class="tiles">
                             <%  int[] mealArr = new int[mealList.size()];
-                                                        for (int i = 0; i < mealList.size(); ++i) {
-                                                        Meal meal = mealList.get(i);%>
+                            for (int i = 0; i < mealList.size(); ++i) {
+                            Meal meal = mealList.get(i);%>
                                 <article class="style1">
                                     <span class="image">
-										<img src="images/pic01.jpg" alt="" />
-									</span>
-                                    <a href="editMeal.html">
+					<img src="images/pic01.jpg" alt="" />
+					</span>
+                                    <a href="../GetMeal?mealID=<%=meal.getMealid()%>">
                                         <h2>
                                             <%=meal.getMealname()%>
                                         </h2>

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import entity.*;
+import entity.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -22,42 +22,36 @@ import javax.transaction.UserTransaction;
  *
  * @author user
  */
-public class EditBeverageList extends HttpServlet {
-@PersistenceContext
+public class ProcessStudentRegistration extends HttpServlet {
+
+    @PersistenceContext
     EntityManager em;
     @Resource
     UserTransaction utx;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+        try {
             HttpSession session = request.getSession();
             
-            Beverage beverage = new Beverage();
-            beverage.setBeverageid(request.getParameter("beverageid"));
-            beverage.setBeveragename(request.getParameter("beveragename"));
-            beverage.setBeveragecreditpoints(Integer.parseInt(request.getParameter("beveragecreditpoints")));
-            beverage.setBeveragequantity(Integer.parseInt(request.getParameter("beveragequantity")));            
-            
+            Student student = new Student();
+            student.setStudentid(request.getParameter("studentid"));
+            student.setStudentname(request.getParameter("studentname"));
+            student.setStudentpassword(request.getParameter("studentpassword"));
+            student.setStudentphoneno(request.getParameter("studentphoneno"));
+            student.setStudentemail(request.getParameter("studentemail"));
+            student.setStudentcreditpoints(0);
             try {
             utx.begin();
-            em.merge(beverage);
+            em.persist(student);
             utx.commit();
             } catch (Exception e) {
-                //utx.rollback();
+                utx.rollback();
             }
-            session.setAttribute("beverage", beverage);
-            response.sendRedirect("GetBeverageList");
+            session.setAttribute("student", student);
+            response.sendRedirect("main/Registered.html");
+
+        } catch (Exception ex) {
         }
     }
 

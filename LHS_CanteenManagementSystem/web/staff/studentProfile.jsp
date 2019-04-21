@@ -36,11 +36,12 @@
         <nav id="menu">
             <h2>${staff.staffname}</h2>
             <h2>Staff Menu</h2>
-            <li><a href="index.jsp">Meal List</a></li>
+            <li><a href="../GetMealList">Meal List</a></li>
             <li><a href="../GetMealOrderList">Meal Order List</a></li>
             <li><a href="../GetFoodList">Food List</a></li>
             <li><a href="../GetBeverageList">Beverage List</a></li>
-            <li><a href="topUp.html">Top Up Credit Points</a></li>
+            <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+            <li><a href="coupon.jsp">Coupon</a></li>
             <li><a href="studentProfile.jsp">Profile</a></li>
             <li><a href="../ProcessLogout">Logout</a></li>
         </nav>

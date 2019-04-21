@@ -37,7 +37,7 @@ public class AddNewFood extends HttpServlet {
             }
             session.setAttribute("food", food);
 
-            response.sendRedirect("staff/food.jsp");
+            response.sendRedirect("GetFoodList");
 
         } catch (Exception ex) {
         }

@@ -37,11 +37,12 @@
             <h1>${staff.staffname}</h1>
             <h2>Staff Menu</h2>
             <ul>
-                <li><a href="index.jsp">Meal List</a></li>
+                <li><a href="../GetMealList">Meal List</a></li>
                 <li><a href="../GetMealOrderList">Meal Order List</a></li>
                 <li><a href="../GetFoodList">Food List</a></li>
                 <li><a href="../GetBeverageList">Beverage List</a></li>
-                <li><a href="topUp.html">Top Up Credit Points</a></li>
+                <li><a href="topUp.jsp">Top Up Credit Points</a></li>
+                <li><a href="coupon.jsp">Coupon</a></li>
                 <li><a href="studentProfile.jsp">Profile</a></li>
                 <li><a href="../ProcessLogout">Logout</a></li>
             </ul>
@@ -56,19 +57,19 @@
                 </header>
                 <!-- Form -->
                 <section>
-                    <form method="post" action="../">
+                    <form method="post" action="../EditBeverageList">
                         <div class="row gtr-uniform">
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="beverageid" id="demo-name" value="" placeholder="Beverage ID" readonly="readonly" />
+                                <input type="text" name="beverageid" id="demo-name" value="${beverage.beverageid}" placeholder="Beverage ID" readonly="readonly" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="beveragename" id="demo-name" value="" placeholder="Beverage Name" />
+                                <input type="text" name="beveragename" id="demo-name" value="${beverage.beveragename}" placeholder="Beverage Name" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="beveragecreditpoints" id="demo-name" value="" placeholder="Credit Points" />
+                                <input type="text" name="beveragecreditpoints" id="demo-name" value="${beverage.beveragecreditpoints}" placeholder="Credit Points" />
                             </div>
                             <div class="col-6 col-12-xsmall">
-                                <input type="text" name="beveragequantity" id="demo-name" value="" placeholder="Quantity" />
+                                <input type="text" name="beveragequantity" id="demo-name" value="${beverage.beveragequantity}" placeholder="Quantity" />
                             </div>
                             <div class="col-12">
                                 <ul class="actions">

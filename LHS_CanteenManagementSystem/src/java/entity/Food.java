@@ -7,14 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author user
  */
 @Entity
 @Table(name = "FOOD")
@@ -32,7 +25,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Food.findByFoodid", query = "SELECT f FROM Food f WHERE f.foodid = :foodid")
     , @NamedQuery(name = "Food.findByFoodname", query = "SELECT f FROM Food f WHERE f.foodname = :foodname")
     , @NamedQuery(name = "Food.findByFoodcreditpoints", query = "SELECT f FROM Food f WHERE f.foodcreditpoints = :foodcreditpoints")
-    , @NamedQuery(name = "Food.findByFoodquantity", query = "SELECT f FROM Food f WHERE f.foodquantity = :foodquantity")})
+    , @NamedQuery(name = "Food.findByFoodquantity", query = "SELECT f FROM Food f WHERE f.foodquantity = :foodquantity")
+    , @NamedQuery(name = "Food.findByFoodidAsc", query = "SELECT f FROM Food f ORDER BY f.foodid")})
 public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,6 +35,7 @@ public class Food implements Serializable {
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "FOODID")
+    @OrderBy("foodid ASC")
     private String foodid;
     @Size(max = 50)
     @Column(name = "FOODNAME")
@@ -49,7 +44,7 @@ public class Food implements Serializable {
     private Integer foodcreditpoints;
     @Column(name = "FOODQUANTITY")
     private Integer foodquantity;
-    @OneToMany(mappedBy = "foodname")
+    @OneToMany(mappedBy = "foodname", cascade = CascadeType.ALL)
     private Collection<Meal> mealCollection;
 
     public Food() {
@@ -90,7 +85,12 @@ public class Food implements Serializable {
     public void setFoodquantity(Integer foodquantity) {
         this.foodquantity = foodquantity;
     }
-
+    
+    public void addMeal(Meal meal){
+        this.mealCollection.add(meal);
+        meal.setFoodname(this);
+    }
+    
     @XmlTransient
     public Collection<Meal> getMealCollection() {
         return mealCollection;

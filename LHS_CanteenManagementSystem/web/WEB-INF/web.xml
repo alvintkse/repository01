@@ -4,10 +4,14 @@
         <servlet-name>ProcessStaffLogin</servlet-name>
         <servlet-class>controller.ProcessStaffLogin</servlet-class>
     </servlet>
-    <!--<servlet>
+    <servlet>
+        <servlet-name>ProcessStudentLogin</servlet-name>
+        <servlet-class>controller.ProcessStudentLogin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ProcessStudentRegistration</servlet-name>
         <servlet-class>controller.ProcessStudentRegistration</servlet-class>
-    </servlet>-->
+    </servlet>
     <servlet>
         <servlet-name>ProcessStaffRegistration</servlet-name>
         <servlet-class>controller.ProcessStaffRegistration</servlet-class>
@@ -21,53 +25,37 @@
         <servlet-class>controller.EditStaffDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Identification</servlet-name>
-        <servlet-class>student.Identification</servlet-class>
+        <servlet-name>Coupon</servlet-name>
+        <servlet-class>controller.Coupon</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StudentGetMealList</servlet-name>
-        <servlet-class>student.StudentGetMealList</servlet-class>
+        <servlet-name>GetMeal</servlet-name>
+        <servlet-class>controller.GetMeal</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProcessStudentLogin</servlet-name>
-        <servlet-class>student.ProcessStudentLogin</servlet-class>
+        <servlet-name>GetFood</servlet-name>
+        <servlet-class>controller.GetFood</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProcessStudentUpdate</servlet-name>
-        <servlet-class>student.ProcessStudentUpdate</servlet-class>
+        <servlet-name>GetBeverage</servlet-name>
+        <servlet-class>controller.GetBeverage</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProcessStudentRegistration</servlet-name>
-        <servlet-class>student.ProcessStudentRegistration</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentGetMealOrder</servlet-name>
-        <servlet-class>student.StudentGetMealOrder</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>StudentSelectMeal</servlet-name>
-        <servlet-class>student.StudentSelectMeal</servlet-class>
-    </servlet>
-    <!--<servlet>
-        <servlet-name>ProcessStudentMealOrder</servlet-name>
-        <servlet-class>student.ProcessStudentMealOrder</servlet-class>
-    </servlet>-->
-    <servlet>
-        <servlet-name>GenerateOrderID</servlet-name>
-        <servlet-class>student.GenerateOrderID</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ProcessStudentMealOrder</servlet-name>
-        <servlet-class>student.ProcessStudentMealOrder</servlet-class>
+        <servlet-name>GetMealOrder</servlet-name>
+        <servlet-class>controller.GetMealOrder</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProcessStaffLogin</servlet-name>
         <url-pattern>/ProcessStaffLogin</url-pattern>
     </servlet-mapping>
-    <!--<servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessStudentLogin</servlet-name>
+        <url-pattern>/ProcessStudentLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ProcessStudentRegistration</servlet-name>
         <url-pattern>/ProcessStudentRegistration</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProcessStaffRegistration</servlet-name>
         <url-pattern>/ProcessStaffRegistration</url-pattern>
@@ -220,10 +208,14 @@
         <servlet-name>StudentRegisterProcess</servlet-name>
         <servlet-class>controller.StudentRegisterProcess</servlet-class>
     </servlet>
-    <!--<servlet>
+    <servlet>
+        <servlet-name>Identification</servlet-name>
+        <servlet-class>controller.Identification</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>StudentSelectMeal</servlet-name>
         <servlet-class>controller.StudentSelectMeal</servlet-class>
-    </servlet>-->
+    </servlet>
     <servlet>
         <servlet-name>StudentOrder</servlet-name>
         <servlet-class>controller.StudentOrder</servlet-class>
@@ -232,53 +224,37 @@
         <servlet-name>StudentRegisterProcess</servlet-name>
         <url-pattern>/StudentRegisterProcess</url-pattern>
     </servlet-mapping>
-    <!--<servlet-mapping>
-        <servlet-name>StudentSelectMeal</servlet-name>
-        <url-pattern>/StudentSelectMeal</url-pattern>
-    </servlet-mapping>-->
-    <servlet-mapping>
-        <servlet-name>StudentOrder</servlet-name>
-        <url-pattern>/StudentOrder</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Identification</servlet-name>
         <url-pattern>/Identification</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StudentGetMealList</servlet-name>
-        <url-pattern>/StudentGetMealList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProcessStudentLogin</servlet-name>
-        <url-pattern>/ProcessStudentLogin</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProcessStudentUpdate</servlet-name>
-        <url-pattern>/ProcessStudentUpdate</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProcessStudentRegistration</servlet-name>
-        <url-pattern>/ProcessStudentRegistration</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StudentGetMealOrder</servlet-name>
-        <url-pattern>/StudentGetMealOrder</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>StudentSelectMeal</servlet-name>
         <url-pattern>/StudentSelectMeal</url-pattern>
     </servlet-mapping>
-    <!--<servlet-mapping>
-        <servlet-name>ProcessStudentMealOrder</servlet-name>
-        <url-pattern>/ProcessStudentMealOrder</url-pattern>
-    </servlet-mapping>-->
     <servlet-mapping>
-        <servlet-name>GenerateOrderID</servlet-name>
-        <url-pattern>/GenerateOrderID</url-pattern>
+        <servlet-name>StudentOrder</servlet-name>
+        <url-pattern>/StudentOrder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProcessStudentMealOrder</servlet-name>
-        <url-pattern>/ProcessStudentMealOrder</url-pattern>
+        <servlet-name>Coupon</servlet-name>
+        <url-pattern>/Coupon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMeal</servlet-name>
+        <url-pattern>/GetMeal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetFood</servlet-name>
+        <url-pattern>/GetFood</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBeverage</servlet-name>
+        <url-pattern>/GetBeverage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMealOrder</servlet-name>
+        <url-pattern>/GetMealOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
