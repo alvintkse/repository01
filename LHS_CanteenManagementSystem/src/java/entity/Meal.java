@@ -7,7 +7,16 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author user
+ * @author User
  */
 @Entity
 @Table(name = "MEAL")
@@ -25,8 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Meal.findByMealid", query = "SELECT m FROM Meal m WHERE m.mealid = :mealid")
     , @NamedQuery(name = "Meal.findByMealname", query = "SELECT m FROM Meal m WHERE m.mealname = :mealname")
     , @NamedQuery(name = "Meal.findByMealtype", query = "SELECT m FROM Meal m WHERE m.mealtype = :mealtype")
-    , @NamedQuery(name = "Meal.findByMealcreditpoints", query = "SELECT m FROM Meal m WHERE m.mealcreditpoints = :mealcreditpoints")
-    , @NamedQuery(name = "Meal.findByMealidAsc", query = "SELECT m FROM Meal m ORDER BY m.mealid")})
+    , @NamedQuery(name = "Meal.findByMealcreditpoints", query = "SELECT m FROM Meal m WHERE m.mealcreditpoints = :mealcreditpoints")})
 public class Meal implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,11 +54,13 @@ public class Meal implements Serializable {
     private Integer mealcreditpoints;
     @OneToMany(mappedBy = "mealname")
     private Collection<Mealorder> mealorderCollection;
+    @OneToMany(mappedBy = "mealid")
+    private Collection<Mealorderb> mealorderbCollection;
     @JoinColumn(name = "BEVERAGENAME", referencedColumnName = "BEVERAGENAME")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Beverage beveragename;
     @JoinColumn(name = "FOODNAME", referencedColumnName = "FOODNAME")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Food foodname;
 
     public Meal() {
@@ -101,6 +111,15 @@ public class Meal implements Serializable {
         this.mealorderCollection = mealorderCollection;
     }
 
+    @XmlTransient
+    public Collection<Mealorderb> getMealorderbCollection() {
+        return mealorderbCollection;
+    }
+
+    public void setMealorderbCollection(Collection<Mealorderb> mealorderbCollection) {
+        this.mealorderbCollection = mealorderbCollection;
+    }
+
     public Beverage getBeveragename() {
         return beveragename;
     }
@@ -141,6 +160,5 @@ public class Meal implements Serializable {
     public String toString() {
         return "entity.Meal[ mealid=" + mealid + " ]";
     }
-
-   
+    
 }

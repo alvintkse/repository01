@@ -19,14 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author user
+ * @author User
  */
 @Entity
 @Table(name = "STAFF")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Staff.findByStaffidAndStaffpassword", query = "SELECT s FROM Staff s WHERE s.staffid = :staffid and s.staffpassword = :staffpassword")
-    , @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
+    @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
     , @NamedQuery(name = "Staff.findByStaffid", query = "SELECT s FROM Staff s WHERE s.staffid = :staffid")
     , @NamedQuery(name = "Staff.findByStaffname", query = "SELECT s FROM Staff s WHERE s.staffname = :staffname")
     , @NamedQuery(name = "Staff.findByStaffpassword", query = "SELECT s FROM Staff s WHERE s.staffpassword = :staffpassword")

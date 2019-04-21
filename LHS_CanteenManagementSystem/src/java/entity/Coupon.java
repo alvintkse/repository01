@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author user
+ * @author User
  */
 @Entity
 @Table(name = "COUPON")
